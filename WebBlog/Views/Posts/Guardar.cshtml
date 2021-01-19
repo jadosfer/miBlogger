@@ -1,0 +1,73 @@
+﻿@model WebBlog.Models.Post
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Hacé tu posteo!</title>
+    <link rel=StyleSheet href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <h2>Hacé tu posteo</h2>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Expresate!</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2", @style = "width:100px;" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @style = "width:200px;" } })
+            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2", @style = "width:100px;" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", @style = "width:200px;" } })
+            @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Genero, htmlAttributes: new { @class = "control-label col-md-2", @style = "width:100px;" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Genero, new { htmlAttributes = new { @class = "form-control", @style = "width:200px;" } })
+            @Html.ValidationMessageFor(model => model.Genero, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Texto, htmlAttributes: new { @class = "control-label col-md-2", @style = "width:100px;" })
+        <div class="col-md-10">
+
+            @Html.TextAreaFor(model => model.Texto, new { cols = "80", rows = "10" })  ;
+
+            @Html.ValidationMessageFor(model => model.Texto, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input type="submit" class="btn btn-default" value="Postear" />
+        </div>
+    </div>
+</div>
+        <br />
+    }
+    <div>
+        @Html.ActionLink("Volver a mis Posts", "Index")
+    </div>
+</body>
+</html>

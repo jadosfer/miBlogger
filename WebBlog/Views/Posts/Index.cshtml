@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebBlog.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>TODOS LOS POSTS</h2>
+
+<p>
+    @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
+    {
+    <p>
+        Genero: @Html.DropDownList("postGenero", "All")
+        Buscar por Título: @Html.TextBox("searchString") <br />
+        <input type="submit" value="Filter" />
+    </p>
+}
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Genero)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Texto)
+        </td>
+        <td>
+            @Html.ActionLink("Detalles", "Details", new { id = item.Id })
+        </td>
+    </tr>
+        }
+    </table>
+
+    <table class="table">
+        <th>
+            <h3>@Html.ActionLink("TUS POSTS", "UserIndex") </h3>
+        </th>
+        <th>
+            <h3>@Html.ActionLink("Creá tu Post", "Create") </h3>
+        </th>
+
+</table>

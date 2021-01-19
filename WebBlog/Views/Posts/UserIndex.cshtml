@@ -1,0 +1,73 @@
+﻿@model IEnumerable<WebBlog.Models.Post>
+    @using System.Web.Security;
+
+@{
+    ViewBag.Title = "UserIndex";
+}
+
+<h2>TUS POSTS</h2>
+
+<p>
+    @using (Html.BeginForm("UserIndex", "Posts", FormMethod.Get))
+    {
+    <p>
+        Genero: @Html.DropDownList("postGenero", "All")
+        Buscar por Título: @Html.TextBox("searchString") <br />
+        <input type="submit" value="Filter" />
+    </p>
+}
+    </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Genero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Texto)
+        </th>
+        <th></th>
+    </tr>
+    <p>@User.Identity.Name</p>
+    @foreach (var item in Model)
+    {
+        if (item.Email == User.Identity.Name)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Titulo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Genero)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Fecha)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Texto)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+        @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+    </td>
+</tr>
+        }
+
+    }
+</table>
+
+    <table class="table">        
+        <th>
+            <h3>@Html.ActionLink("Todos los Posts", "Index") </h3>
+        </th>
+        <th>
+            <h3>@Html.ActionLink("Creá tu Post", "Create") </h3>
+        </th>
+
+</table>
